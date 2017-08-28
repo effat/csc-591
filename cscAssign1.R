@@ -10,8 +10,8 @@ input_stdProb<-paste(working_dir,"\\",file1, sep="")
 input_stdStep<-paste(working_dir,"\\", file2,sep="")
 
 ###read .csv files
-std_prb<-read.table(input_stdProb, sep=",",header=T,check.names = FALSE)
-std_step<-read.table(input_stdStep, sep=",",header=T, check.names = FALSE)
+std_prb<-read.table(file1, sep=",",header=T,check.names = FALSE)
+std_step<-read.table(file2, sep=",",header=T, check.names = FALSE)
 
 
 ## Extract columns "Anon Student Id", "Correct First Attempts" from std_prb file
