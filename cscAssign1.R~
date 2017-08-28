@@ -1,5 +1,5 @@
 
-working_dir<-"\\afs\\unity.ncsu.edu\\users\\e\\efarhan\\csc-591"
+working_dir<-"C:\\Drive E\\Fall 2017\\CSC 591\\HW1\\EDM Summer School 2017"
 
 file1<-"student_prb_clean.csv"
 file2<-"student_step_clean.csv"

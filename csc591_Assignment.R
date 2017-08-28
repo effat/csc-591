@@ -1,7 +1,7 @@
 
 
-working_dir<-"C:\\Drive E\\Fall 2017\\CSC 591\\HW1\\EDM Summer School 2017"
-setwd(working_dir)
+working_dir<-"\\afs\\unity.ncsu.edu\\users\\e\\efarhan\\csc-591"
+#setwd(working_dir)
 
 
 #########
@@ -81,7 +81,7 @@ for (Var in col_b22) {
 ###write files as csv
 per_std_stats<-as.data.frame(b22)
 csvFile1_name<-"per_std_stats.csv"
-csvFile1<-paste(working_dir,"\\",csvFile1_name, sep="")
+csvFile1<-paste(csvFile1_name, sep="")
 write.csv(per_std_stats, csvFile1)
 
 
@@ -112,14 +112,14 @@ if(length(to_remove_again)>0){
 ###Plotting for Correct First Attempts
 attemps<-b22_clean[,2]
 z.norm<-(attemps-mean(attemps))/sd(attemps)## standardize points
-qqnorm(z.norm) ## drawing the QQplot 
+qqnorm(z.norm, main= "Normal Q-Q plot for Total Correct First Attempts") ## drawing the QQplot 
 abline(0,1, col="blue") ## drawing a 45-degree reference line
 hist(attemps,main="Histogram of Correct First Attempts")
 
 
-###Plotting for Correct First Attempts
+###Plotting for Step Durations (sec)
 durations<-b22_clean[,3]
 z.norm<-(durations-mean(durations))/sd(durations)
-qqnorm(z.norm) ## drawing the QQplot 
+qqnorm(z.norm, main="Normal Q-Q plot for Total Step Duration (sec)") ## drawing the QQplot 
 abline(0,1, col="red") ## drawing a 45-degree reference line
 hist(durations,main="Histogram of Total Step Duration (sec)")

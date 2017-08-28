@@ -13,8 +13,8 @@ input_stdStep<-paste(working_dir,"\\", file2,sep="")
 
 
 ### read files
-std_prb<-read.table(file1,sep="\t",header=T, check.names = FALSE, na.strings=c(""," ",".","NA"))
-std_step<-read.table(file2,sep="\t",header=T, check.names = FALSE, na.strings=c(""," ",".","NA"))
+std_prb<-read.table(input_stdProb,sep="\t",header=T, check.names = FALSE, na.strings=c(""," ",".","NA"))
+std_step<-read.table(input_stdStep,sep="\t",header=T, check.names = FALSE, na.strings=c(""," ",".","NA"))
 
 
 ##polynomial interpolating missing values in std_prb file

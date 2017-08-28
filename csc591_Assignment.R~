@@ -1,13 +1,12 @@
 
-working_dir<-"\\afs\\unity.ncsu.edu\\users\\e\\efarhan\\csc-591"
 
+working_dir<-"\\afs\\unity.ncsu.edu\\users\\e\\efarhan\\csc-591"
+#setwd(working_dir)
+
+
+#########
 file1<-"student_prb_clean.csv"
 file2<-"student_step_clean.csv"
-
-
-### concatenate path location to filename
-input_stdProb<-paste(working_dir,"\\",file1, sep="")
-input_stdStep<-paste(working_dir,"\\", file2,sep="")
 
 ###read .csv files
 std_prb<-read.table(file1, sep=",",header=T,check.names = FALSE)
@@ -67,26 +66,30 @@ for (Var in col_b22) {
   
   outliers<-boxplot.stats(b22[,Var])$out
   
- # cat("out ", outliers, "\n")
+  # cat("out ", outliers, "\n")
   outlier_rows<-c()
   j<-1
   while( j<=length(outliers)){
-     outlier_rows<-c(outlier_rows, which(b22[,Var]==outliers[j]))
-     j<-j+1
+    outlier_rows<-c(outlier_rows, which(b22[,Var]==outliers[j]))
+    j<-j+1
   }
   
   to_remove_again<-c(to_remove_again, outlier_rows)
 }
 
-### View the two basic per student performance statistics, with outliers
-View(b22)
+### output the two basic per student performance statistics, with outliers
+###write files as csv
+per_std_stats<-as.data.frame(b22)
+csvFile1_name<-"per_std_stats.csv"
+csvFile1<-paste(csvFile1_name, sep="")
+write.csv(per_std_stats, csvFile1)
 
 
 ###remove outlier rows, if outlier_rows>0
 b22_clean<-b22
 
 if(length(to_remove_again)>0)
-   b22_clean<-b22[-to_remove_again,]
+  b22_clean<-b22[-to_remove_again,]
 
 
 
@@ -109,14 +112,14 @@ if(length(to_remove_again)>0){
 ###Plotting for Correct First Attempts
 attemps<-b22_clean[,2]
 z.norm<-(attemps-mean(attemps))/sd(attemps)## standardize points
-qqnorm(z.norm) ## drawing the QQplot 
+qqnorm(z.norm, main= "Normal Q-Q plot for Toatl Correct First Attempts") ## drawing the QQplot 
 abline(0,1, col="blue") ## drawing a 45-degree reference line
 hist(attemps,main="Histogram of Correct First Attempts")
 
 
-###Plotting for Correct First Attempts
+###Plotting for Step Durations (sec)
 durations<-b22_clean[,3]
 z.norm<-(durations-mean(durations))/sd(durations)
-qqnorm(z.norm) ## drawing the QQplot 
+qqnorm(z.norm, main="Normal Q-Q plot for Total Step Durations (sec)") ## drawing the QQplot 
 abline(0,1, col="red") ## drawing a 45-degree reference line
 hist(durations,main="Histogram of Total Step Duration (sec)")
