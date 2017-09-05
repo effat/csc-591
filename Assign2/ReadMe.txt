@@ -9,8 +9,9 @@ To run csc591_Assig2.R:
 To run ass2.py:
 --------------------
 
-1. Navigate to the folder from terminal.
-2. Type: python ass2.py
+1.Type: pip install pandas 
+2 Navigate to the folder from terminal.
+3.Type: python ass2.py
 
 
 Description of csc591_Assign2.R
