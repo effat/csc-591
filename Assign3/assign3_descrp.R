@@ -5,17 +5,6 @@ file_name<-"AssignmentData.csv"
 ###read .csv files
 std_KT<-read.table(file_name, sep=",",header=T,check.names = FALSE)
 
-##total rows
-tot_rows<-nrow(std_KT)
-
-##create a new data frame for output: contains crrect prectdiction of each step: Cis, Bayesian prob. of learning a KC based on single KC model: p(Ln), and 
-#multi-KC model. This data frame has same number of rows as the input file 
-
-
-##create data frame
-allStdBKTsteps<-data.frame(std_IDs=character(), stepID = integer(), KC_1_Ci = double(), KC_27_Ci = double(), KC_24_Ci = double(), KC_14_Ci=double(), KC_22_Ci = double(),
-                           KC_20_Ci = double(), KC_21_Ci = double(),BayesKC_1 = double(), BayesKC_27 = double(), BayesKC_24 =double(), BayesKC_14 =double(),BayesKC_22 = double(), 
-                           BayesKC_20 = double(), BayesKC_21 = double(), multiKC =double(), actualPer = integer(), stringsAsFactors=FALSE)
 
 
 
@@ -198,7 +187,7 @@ calcKC<-function(perStdKC){
 
   
  
-    return (list(res=perStdBKT, ME_single = ME_perKC, ME_multi= ME_multiKC))
+    return (list( ME_single = ME_perKC, ME_multi= ME_multiKC))
 }
 
 
@@ -206,8 +195,6 @@ calcKC<-function(perStdKC){
 ##get all distinct student-IDs  from subset_std_step (subset_std_prob)
 std_IDs<-as.character(unique(std_KT[, 1]))
 
-###next position to insert element in allStdBKTSteps, initially 0
-nextPos<-0
 
 
 #### call function calcKC for each std
@@ -226,22 +213,7 @@ for(i in 1:length(std_IDs)){
   
   ###calc per std all KCs
   resultKC<-calcKC(get_KC_rows)
-  resTable<-resultKC$res
-  
-  ###insert data in allStdBKTsteps table
- 
-  for(j in 1:totSteps){
-    row_ind<-nextPos+j
-    
-    allStdBKTsteps[row_ind, 1]<-curr_std
-    allStdBKTsteps[row_ind, 2:18]<- resTable[j, 1:17]
-    
-  }##end for inserting in allStdBKTSteps
-  
-  ###increment nextPos
-  nextPos<-nextPos+totSteps
- # cat("testing ...", nextPos, "\n")
-  
+
   ##insert ME values
   ME_df[i, 1]<-curr_std
   ME_df[i, 2:8]<- resultKC$ME_single
@@ -251,7 +223,3 @@ for(i in 1:length(std_IDs)){
   
 }
 
-all_std_stats<-as.data.frame(allStdBKTsteps)
-csvFile1_name<-"all_std_stats.csv"
-csvFile1<-paste(csvFile1_name, sep="")
-write.csv(all_std_stats, csvFile1)
