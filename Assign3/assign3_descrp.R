@@ -174,8 +174,8 @@ calcKC<-function(perStdKC){
   
   
   
-  ME_perKC<-rep(0, length(newKCindices))
-  ME_multiKC<-rep(0, length(newKCindices))#mean(multiKC_predicts-actualScores)
+  ME_perKC<-rep(0, length(newKCindices_local))
+  ME_multiKC<-rep(0, length(newKCindices_local))#mean(multiKC_predicts-actualScores)
   
   actualScores<-perStdBKT[, 17]
   
