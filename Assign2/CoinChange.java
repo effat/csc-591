@@ -8,6 +8,7 @@ public class CoinChange{
 		 //This method should return the number of coins
         
 		int[] dp = new int [value+1];
+		int i;
         dp[0]=0; // do not need any coin to get 0 amount
         for( i=1;i<=value; i++)
             dp[i]= Integer.MAX_VALUE;
